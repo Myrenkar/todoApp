@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
-<body ng-app>
-        <div class="container">
-            <h1>Hello  Angular</h1>
-        </div>
+<body ng-app="app">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li>
+            <a ui-sref="main">Home</a>
+          </li>
+          <!--<li>-->
+          <!--  <a ui-sref="github">GitHub</a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+        <ui-view></ui-view>
     </div>
     <script type="text/javascript" src="bundle.js"></script>
 </body>
