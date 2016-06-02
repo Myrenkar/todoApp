@@ -7,12 +7,10 @@ import firebase from 'firebase'
 import routing from './config';
 
 import main from './features/main';
-// import github from './features/github';
 
 const ngModule = angular
         .module('app', [
           uirouter, 
-          main,
-          angularFire
+          main
         ])
         .config(routing);

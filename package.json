@@ -20,8 +20,7 @@
     "file-loader": "^0.8.5",
     "firebase": "^2.2.4",
     "html-loader": "^0.4.3",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.1"
+    "style-loader": "^0.13.1"
   },
   "scripts": {
     "start": "node node_modules/.bin/webpack-dev-server --host=0.0.0.0 --content-base app",
