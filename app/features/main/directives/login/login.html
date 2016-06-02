@@ -1,4 +1,36 @@
-<div class="input-group input-group-lg">
-  <span class="input-group-addon" id="sizing-addon1">@</span>
-  <input type="text" class="form-control" placeholder="mail" aria-describedby="sizing-addon1">
+<div class="col-md-6 col-md-offset-3">
+
+  <h2>Login</h2>
+
+  <form name="form" ng-submit="register()">
+
+    <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+
+      <label for="e-mail">e-mail</label>
+
+      <input type="text" name="e-mail" id="e-mail" class="form-control" ng-model="mail" required />
+
+      <span ng-show="form.mail.$dirty && form.mail.$error.required" class="help-block">Username is required</span>
+
+    </div>
+
+ <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+
+            <label for="password">Password</label>
+
+            <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+
+        </div>
+
+    <div class="form-actions">
+
+      <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+
+
+    </div>
+
+  </form>
+
 </div>
