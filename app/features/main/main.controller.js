@@ -13,21 +13,25 @@ export default class MainController {
         };
 
 
-        $scope.login = function() {
-            var auth = $firebaseAuth(ref);
-            // login with Facebook
-            auth.$authWithOAuthPopup("facebook").then(function(authData) {
-                console.log("Logged in as:", authData.uid);
-            }).catch(function(error) {
-                console.log("Authentication failed:", error);
+        $scope.loginUser = function() {
+            ref.authWithPassword({
+                email: $scope.emailToSend,
+                password: $scope.passwordToSend
+            }, function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                }
+                else {
+                    console.log("Authenticated successfully with payload:", authData);
+                }
             });
         };
 
-        $scope.register = function() {
+        $scope.registerUser = function() {
 
             ref.createUser({
                 email: $scope.mail,
-                password : $scope.password
+                password: $scope.password
             }, function(error, userData) {
                 if (error) {
                     console.log("Error creating user:", error);

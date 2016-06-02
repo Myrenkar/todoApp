@@ -7,10 +7,13 @@ import firebase from 'firebase'
 import routing from './config';
 
 import main from './features/main';
+import register from './features/register';
+
 
 const ngModule = angular
         .module('app', [
           uirouter, 
-          main
+          main,
+          register
         ])
         .config(routing);
