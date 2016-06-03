@@ -3,7 +3,8 @@
 export default class MainController {
     constructor($scope, $firebaseArray, $firebaseAuth) {
 
-        var ref = new Firebase("https://learn11.firebaseio.com");
+        var ref = new Firebase("https://learn11.firebaseio.com/todos");
+        ref.orderByChild('mail').equalTo($scope.email)
         $scope.messages = $firebaseArray(ref);
 
         $scope.addMessage = function() {
@@ -15,8 +16,8 @@ export default class MainController {
 
         $scope.loginUser = function() {
             ref.authWithPassword({
-                email: $scope.emailToSend,
-                password: $scope.passwordToSend
+                email: $scope.email,
+                password: $scope.password
             }, function(error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
@@ -27,26 +28,11 @@ export default class MainController {
             });
         };
 
-        $scope.registerUser = function() {
-
-            ref.createUser({
-                email: $scope.mail,
-                password: $scope.password
-            }, function(error, userData) {
-                if (error) {
-                    console.log("Error creating user:", error);
-                }
-                else {
-                    console.log("Successfully created user account with uid:", userData.uid);
-                }
-            });
-
+        $scope.addTask = function(){
+            var message_ref = new Firebase('https://learn11.firebaseio.com/todos');
+            var newMessageRef = message_ref.push();
+        newMessageRef.set({ 'done': 'false', 'text': $scope.task, 'mail' : $scope.email });
+            
         };
-
-
-
-        // function($scope) {
-        //     $scope.isCollapsed = false;
-        // };
     }
 }
