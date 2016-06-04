@@ -1,7 +1,7 @@
 /*global Firebase*/
 
 export default class MainController {
-    constructor($scope, $firebaseArray, $firebaseAuth, $firebaseObject) {
+    constructor($scope, $firebaseArray, $firebaseAuth) {
 
         var ref = new Firebase("https://learn11.firebaseio.com/todos");
         $scope.messages = $firebaseArray(ref);
@@ -34,7 +34,7 @@ export default class MainController {
             var message_ref = new Firebase('https://learn11.firebaseio.com/todos');
             var newMessageRef = message_ref.push();
             newMessageRef.set({
-                'done': true,
+                'done': false,
                 'text': $scope.task,
                 'mail': $scope.email
             });
@@ -43,26 +43,17 @@ export default class MainController {
         $scope.editTask = function(message) {
             $scope.message = $scope.messages.text;
             console.log($scope.messages.text);
-            // $scope.editIndex = index;
+          
         }
 
         $scope.doneTask = function(message) {
             var ref = new Firebase('https://learn11.firebaseio.com/todos/' + message.$id)
-            // var selected_message = $firebaseObject(ref)
-            // console.log(selected_message)
-            console.log(ref)
-            console.log(message.$id)
             ref.update({
                 done: true
             });
         }
         $scope.unDoneTask = function(message) {
             var ref = new Firebase('https://learn11.firebaseio.com/todos/' + message.$id)
-                //  var selected_message =   $firebaseArray(ref)
-            // var selected_message = $firebaseObject(ref)
-            // console.log(selected_message)
-            console.log(message.$id)
-            console.log(ref)
             ref.update({
                 done: false
             });

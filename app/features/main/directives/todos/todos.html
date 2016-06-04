@@ -21,11 +21,11 @@
           <p class="lead">{{message.text}}</p>
           <div>
             <span class="pull-right">
-              <button class="btn btn-default btn-xs " ng-click="editTask(message, $index)"><span class="glyphicon glyphicon-pencil" 
+              <button class="btn btn-default btn-xs " ng-click="editTask(message)"><span class="glyphicon glyphicon-pencil" 
                 ></span></button>
 
-            <button class="btn btn-primary btn-xs" ng-show="! message.done" ng-click="doneTask(message, $index)"><span class="glyphicon glyphicon-ok"></span></button>
-            <button class="btn btn-primary btn-xs" ng-show="message.done" ng-click="unDoneTask(message)"><span class="glyphicon glyphicon-repeat"></span></button>
+            <button class="btn btn-primary btn-xs" ng-show="message.done" ng-click="doneTask(message)"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary btn-xs" ng-show="!message.done" ng-click="unDoneTask(message)"><span class="glyphicon glyphicon-repeat"></span></button>
             <button class="btn btn-danger btn-xs" ng-click="deleteTask(message)"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
           </div>
