@@ -13,27 +13,31 @@
           </div>
         </div>
         <hr/>
-        <!-- Form Ends Here -->
-        {{isLogged}}
-        <!-- Task List Starts Here -->
-        <ul class="list-group" ng-show="isLogged">
 
-          <li class="list-group-item clearfix message" ng-repeat="message in messages | filter: {mail : email}" ng-class="{disabled: message.done }">
-            <p class="lead">{{message.text}}</p>
-            <div>
-              <span class="pull-right">
+        <div ng-show="isLogged">
+          <div>
+            <button class="btn btn-default" type="button" ng-click="filterAll()"> All</button>
+            <button class="btn btn-default" type="button" ng-click="filterActive()">Active</button>
+            <button class="btn btn-default" type="button" ng-click="filterDone()">Done</button>
+
+          </div>
+
+          <ul class="list-group" ng-show="isLogged">
+            <li class="list-group-item clearfix message" ng-repeat="message in messages | filter: {mail : email, done : statusFilter} " ng-class="{disabled: message.done }">
+              <p class="lead">{{message.text}}</p>
+              <div>
+                <span class="pull-right">
               <button class="btn btn-default btn-xs " ng-click="editTask(message)"><span class="glyphicon glyphicon-pencil" 
                 ></span></button>
-
-              <button class="btn btn-primary btn-xs" ng-show="!message.done" ng-click="doneTask(message)"><span class="glyphicon glyphicon-ok"></span></button>
-              <button class="btn btn-primary btn-xs" ng-show="message.done" ng-click="unDoneTask(message)"><span class="glyphicon glyphicon-repeat"></span></button>
-              <button class="btn btn-danger btn-xs" ng-click="deleteTask(message)"><span class="glyphicon glyphicon-remove"></span></button>
-              </span>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Task List Ends Here -->
+                <button class="btn btn-primary btn-xs" ng-show="!message.done" ng-click="doneTask(message)"><span class="glyphicon glyphicon-ok"></span></button>
+                <button class="btn btn-primary btn-xs" ng-show="message.done" ng-click="unDoneTask(message)"><span class="glyphicon glyphicon-repeat"></span></button>
+                <button class="btn btn-danger btn-xs" ng-click="deleteTask(message)"><span class="glyphicon glyphicon-remove"></span></button>
+                </span>
+              </div>
+              <p class="lead">{{message.mail}}</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 

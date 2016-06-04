@@ -1,7 +1,7 @@
 /*global Firebase*/
 
 export default class MainController {
-    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope) {
+    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope, $routeParams) {
 
         var ref = new Firebase("https://learn11.firebaseio.com/todos");
         $scope.messages = $firebaseArray(ref);
@@ -11,7 +11,15 @@ export default class MainController {
                 text: $scope.newMessageText
             });
         };
-
+        
+        
+        $scope.$on('$routeChangeSuccess', function () {
+			var status = $scope.status = $routeParams.status || '';
+			$scope.statusFilter = (status === 'active') ?
+				{ done: false } : (status === 'completed') ?
+				{ done: true } : {};
+		});
+        
         $rootScope.isLogged = false;
 
         $scope.loginUser = function() {
@@ -72,5 +80,13 @@ export default class MainController {
             $scope.messages.$remove(message)
         }
 
+        $scope.filterAll = function() {
+            $scope.messages = $scope.messages
+
+        };
+        $scope.filterActive = function() {
+           
+
+        };
     }
 }
