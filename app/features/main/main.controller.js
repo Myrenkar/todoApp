@@ -1,7 +1,7 @@
 /*global Firebase*/
 
 export default class MainController {
-    constructor($scope, $firebaseArray, $firebaseAuth) {
+    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope) {
 
         var ref = new Firebase("https://learn11.firebaseio.com/todos");
         $scope.messages = $firebaseArray(ref);
@@ -12,7 +12,7 @@ export default class MainController {
             });
         };
 
-        $scope.isLogged = false
+        $rootScope.isLogged = false;
 
         $scope.loginUser = function() {
             ref.authWithPassword({
@@ -20,12 +20,19 @@ export default class MainController {
                 password: $scope.password
             }, function(error, authData) {
                 if (error) {
-                    $scope.isLogged = false
+                    $scope.$apply(function() {
+                        $rootScope.isLogged = false
+                    });
                     console.log("Login Failed!", error);
                 }
                 else {
-                    $scope.isLogged = true
-                    console.log($scope.isLogged)
+                    $scope.$apply(function() {
+                        $rootScope.isLogged = true
+                        console.log($rootScope.isLogged)
+                    });
+                    //  $rootScope.$broadcast('isLogged', true)
+
+
                 }
             });
         };
@@ -43,7 +50,7 @@ export default class MainController {
         $scope.editTask = function(message) {
             $scope.message = $scope.messages.text;
             console.log($scope.messages.text);
-          
+
         }
 
         $scope.doneTask = function(message) {
