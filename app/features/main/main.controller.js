@@ -1,7 +1,7 @@
 /*global Firebase*/
 
 export default class MainController {
-    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope, $routeParams) {
+    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope) {
 
         var ref = new Firebase("https://learn11.firebaseio.com/todos");
         $scope.messages = $firebaseArray(ref);
@@ -11,15 +11,11 @@ export default class MainController {
                 text: $scope.newMessageText
             });
         };
-        
-        
-        $scope.$on('$routeChangeSuccess', function () {
-			var status = $scope.status = $routeParams.status || '';
-			$scope.statusFilter = (status === 'active') ?
-				{ done: false } : (status === 'completed') ?
-				{ done: true } : {};
-		});
-        
+
+
+        $scope.isDoneVisible = true
+        $scope.isActiveVisible = true
+
         $rootScope.isLogged = false;
 
         $scope.loginUser = function() {
@@ -81,12 +77,26 @@ export default class MainController {
         }
 
         $scope.filterAll = function() {
-            $scope.messages = $scope.messages
-
+            $scope.isDoneVisible = true
+            $scope.isActiveVisible = true
+            console.log($scope.isActiveVisible)
+            console.log($scope.isDoneVisible)
         };
         $scope.filterActive = function() {
-           
+            $scope.isDoneVisible = false
+            $scope.isActiveVisible = true
+            console.log($scope.isActiveVisible)
+            console.log($scope.isDoneVisible)
+        };
+
+        $scope.filterDone = function() {
+
+            $scope.isDoneVisible = true
+            $scope.isActiveVisible = false
+            console.log('Active : ' + $scope.isActiveVisible)
+            console.log('Done : ' + $scope.isDoneVisible)
 
         };
+
     }
 }
