@@ -30,9 +30,8 @@ export default class MainController {
             $scope.isLogged = $scope.emails.some(function(arrVal) {
                 return $scope.email === arrVal;
             });
-            console.log($scope.isLogged);
             if ($scope.isLogged) {
-                confirm("Successfully logged!");
+                alert("Successfully logged!");
                 $scope.emailToFilter = $scope.email;
             }
 
@@ -71,22 +70,19 @@ export default class MainController {
         $scope.filterAll = function() {
             $scope.isDoneVisible = true
             $scope.isActiveVisible = true
-            console.log($scope.isActiveVisible)
-            console.log($scope.isDoneVisible)
+
         };
         $scope.filterActive = function() {
             $scope.isDoneVisible = false
             $scope.isActiveVisible = true
-            console.log($scope.isActiveVisible)
-            console.log($scope.isDoneVisible)
+
         };
 
         $scope.filterDone = function() {
 
             $scope.isDoneVisible = true
             $scope.isActiveVisible = false
-            console.log('Active : ' + $scope.isActiveVisible)
-            console.log('Done : ' + $scope.isDoneVisible)
+
 
         };
         $scope.showMine = function() {

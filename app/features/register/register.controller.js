@@ -8,13 +8,13 @@ export default class RegisterController {
 
             ref.createUser({
                 email: $scope.mail,
-                password: $scope.password
+                password: "1qazxsw2"
             }, function(error, userData) {
                 if (error) {
                     console.log("Error creating user:", error);
                 }
                 else {
-                    confirm("Successfully created user" );
+                    alert("Successfully logged!");
                     console.log("Successfully created user account with uid:", userData.uid);
                 }
             });
