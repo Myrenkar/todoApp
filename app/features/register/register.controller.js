@@ -14,6 +14,7 @@ export default class RegisterController {
                     console.log("Error creating user:", error);
                 }
                 else {
+                    confirm("Successfully created user" );
                     console.log("Successfully created user account with uid:", userData.uid);
                 }
             });

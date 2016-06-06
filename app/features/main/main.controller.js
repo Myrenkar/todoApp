@@ -1,46 +1,21 @@
 /*global Firebase*/
 
 export default class MainController {
-    constructor($scope, $firebaseArray, $firebaseAuth, $rootScope) {
+    constructor($scope, $firebaseArray, $rootScope) {
 
         var ref = new Firebase("https://learn11.firebaseio.com/todos");
+
         $scope.messages = $firebaseArray(ref);
 
-        $scope.addMessage = function() {
-            $scope.messages.$add({
-                text: $scope.newMessageText
-            });
-        };
-        $scope.emails = []
-       
-        $scope.isDoneVisible = true
-        $scope.isActiveVisible = true
+        $scope.emails = [];
+        $rootScope.emailToFilter = "";
 
         $rootScope.isLogged = false;
-
-        // $scope.loginUser = function() {
-
-        //     ref.authWithPassword({
-        //         email: $scope.email,
-        //         password: $scope.password
-        //     }, function(error, authData) {
-        //         if (error) {
-        //             $scope.$apply(function() {
-        //                 $rootScope.isLogged = false
-        //             });
-        //             console.log("Login Failed!", error);
-        //         }
-        //         else {
-        //             $scope.$apply(function() {
-        //                 $rootScope.isLogged = true
-        //                 console.log($rootScope.isLogged)
-        //             });
-        //             //  $rootScope.$broadcast('isLogged', true)
+        $scope.isDoneVisible = true;
+        $scope.isActiveVisible = true;
 
 
-        //         }
-        //     });
-        // };
+
         $scope.loginUser = function() {
             ref.orderByValue().on("value", function(snapshot) {
                 snapshot.forEach(function(data) {
@@ -56,14 +31,12 @@ export default class MainController {
                 return $scope.email === arrVal;
             });
             console.log($scope.isLogged);
-
+            if ($scope.isLogged) {
+                confirm("Successfully logged!");
+                $scope.emailToFilter = $scope.email;
+            }
 
         };
-        // $scope.emails.forEach(function(mail){
-
-        //   if (mail == $scope.email){}
-
-        // });
 
         $scope.addTask = function() {
             var message_ref = new Firebase('https://learn11.firebaseio.com/todos');
@@ -75,11 +48,6 @@ export default class MainController {
             });
 
         };
-        $scope.editTask = function(message) {
-            $scope.message = $scope.messages.text;
-            console.log($scope.messages.text);
-
-        }
 
         $scope.doneTask = function(message) {
             var ref = new Firebase('https://learn11.firebaseio.com/todos/' + message.$id)
@@ -121,7 +89,12 @@ export default class MainController {
             console.log('Done : ' + $scope.isDoneVisible)
 
         };
-
+        $scope.showMine = function() {
+            $scope.emailToFilter = $scope.email;
+        };
+        $scope.showAll = function() {
+            $scope.emailToFilter = "";
+        };
 
 
     }
