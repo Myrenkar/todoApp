@@ -12,7 +12,7 @@ export default class MainController {
             });
         };
         $scope.emails = []
-        $scope.email = ""
+       
         $scope.isDoneVisible = true
         $scope.isActiveVisible = true
 
@@ -42,36 +42,29 @@ export default class MainController {
         //     });
         // };
         $scope.loginUser = function() {
-            var keepGoing = true;
             ref.orderByValue().on("value", function(snapshot) {
                 snapshot.forEach(function(data) {
-                    console.log('Foreach' + $scope.isLogged)
-                    console.log(keepGoing)
-
-                    if (keepGoing == true) {
-
-                        var firebase_mail = data.val().mail;
-                        console.log(firebase_mail)
-                        if ($scope.emails == firebase_mail) {
-
-                            $scope.isLogged = true
-                            console.log($scope.isLogged)
-                            keepGoing = false
-                        }
-                        else {
-
-                            $scope.isLogged = false
-                        }
+                    var firebase_mail = data.val().mail;
+                    if ($scope.emails.indexOf(firebase_mail) == -1) {
+                        $scope.emails.push(firebase_mail);
                     }
-
                 });
+
             });
-            // $scope.emails.forEach(function(mail){
 
-            //   if (mail == $scope.email){}
+            $scope.isLogged = $scope.emails.some(function(arrVal) {
+                return $scope.email === arrVal;
+            });
+            console.log($scope.isLogged);
 
-            // });
+
         };
+        // $scope.emails.forEach(function(mail){
+
+        //   if (mail == $scope.email){}
+
+        // });
+
         $scope.addTask = function() {
             var message_ref = new Firebase('https://learn11.firebaseio.com/todos');
             var newMessageRef = message_ref.push();
