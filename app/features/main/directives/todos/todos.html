@@ -2,7 +2,7 @@
 
   <ng-view>
     <div class="container" ng-controller="MainController">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-offset-2 col-lg-offset-8">
         <h2>ToDo App</h2>
         <div class="form">
           <div class="input-group">
@@ -34,11 +34,13 @@
             <button class="btn btn-info" type="button" ng-click="showMine()">Mine</button>
           </div>
 
+          <br />
+
           <div style="display: table;">
 
             <div ng-show="isActiveVisible" style="display :table-cell; width : 400px" align='left'>
               <ul class="list-group">
-                <li class="list-group-item clearfix  " ng-repeat="message in messages | filter: {mail : emailToFilter} | filter : {done : false}">
+                <li class="list-group-item" ng-repeat="message in messages | filter: {mail : emailToFilter} | filter : {done : false}">
                   <p class="lead">{{message.text}}</p>
                   <div>
                     <span class="pull-right">
@@ -54,7 +56,7 @@
 
             <div ng-show="isDoneVisible" style="display :table-cell; width : 400px" align='right'>
               <ul class="list-group">
-                <li class="list-group-item clearfix messages " ng-repeat="message in messages | filter: {mail : emailToFilter} | filter : {done : true}" ng-class="{disabled: message.done }">
+                <li class="list-group-item" ng-repeat="message in messages | filter: {mail : emailToFilter} | filter : {done : true}" ng-class="{disabled: message.done }">
                   <p class="lead" align='left'>{{message.text}}</p>
                   <div>
                     <span class="pull-right">
@@ -72,5 +74,5 @@
         </div>
       </div>
     </div>
-
+  </ng-view>
 </body>

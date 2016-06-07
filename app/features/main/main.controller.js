@@ -34,6 +34,10 @@ export default class MainController {
                 alert("Successfully logged!");
                 $scope.emailToFilter = $scope.email;
             }
+            else {
+
+                alert("Login not found. To register add new task with this email and then login again.")
+            }
 
         };
 
